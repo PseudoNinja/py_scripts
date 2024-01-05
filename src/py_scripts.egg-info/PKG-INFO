@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: py_scripts
+Version: 0.0.1
+Summary: Useful utilites I have created over the years
+Author-email: Eric Miller <426845+PseudoNinja@users.noreply.github.com>
+Project-URL: Homepage, https://github.com/PseudoNinja/py_scripts
+Project-URL: Issues, https://github.com/PseudoNinja/py_scripts/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# py_scripts
+
+## Description
+
+Useful Python scripts and utilities
+
+## Installation instructions
+
+```
+python -m pip install "https://github.com/PseudoNinja/py_scripts"
+```
+
+## Usage
+
+### Image Service
+
+#### ImageService.convert_tiff_to_jpeg
+
+_Description:_ Convert TIFF files in Directory to JPEG
+_Args:_
+
+-   dir_path (str, optional): Directort path to be converted. Defaults to directory run from

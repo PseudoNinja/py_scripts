@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/py_scripts/ImageService.py
+src/py_scripts/__init__.py
+src/py_scripts.egg-info/PKG-INFO
+src/py_scripts.egg-info/SOURCES.txt
+src/py_scripts.egg-info/dependency_links.txt
+src/py_scripts.egg-info/top_level.txt
+src/py_scripts/tests/__init__.py
+src/py_scripts/tests/test_ImageService.py
