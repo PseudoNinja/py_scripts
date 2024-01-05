@@ -10,6 +10,37 @@ Useful Python scripts and utilities
 python -m pip install "https://github.com/PseudoNinja/py_scripts"
 ```
 
-## Disclaimer
+## Usage
 
-These scripts are provided without warrenty or promise of their functionality or security. Although I have made a best faith effort in creating these scripts this repository is not actively supported and future issues may or may not be patched. _USE AT YOUR OWN DISCRETION_
+### Image Service
+
+#### ImageService.convert_tiff_to_jpeg
+
+_Description:_ Convert Image File from TIFF to JPEG
+
+_Args:_
+
+-   file_path (str): TIFF file to be converted
+
+_Returns:_
+
+-   bool: conversion process completed for file
+
+_Example:_
+
+```[python]
+was_converted:bool = ImageService.convert_tiff_to_jpeg(test_tiff_image_file_path)
+```
+
+#### ImageService.convert_directory_tiff_to_jpeg
+
+_Description:_ Convert TIFF files in Directory to JPEG
+_Args:_
+
+-   dir_path (str, optional): Directort path to be converted. Defaults to directory run from
+
+_Example:_
+
+```[python]
+ImageService.convert_directory_tiff_to_jpeg(test_dir)
+```
