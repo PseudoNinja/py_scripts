@@ -11,7 +11,7 @@ class ImageService:
         """Convert Image File from TIFF to JPEG
 
         Args:
-            file_path (str): JPEG file to be converted
+            file_path (str): TIFF file to be converted
 
         Returns:
             bool: conversion process completed for file
@@ -22,6 +22,9 @@ class ImageService:
         
         completed:bool = False
         try:
+            if not os.path.isfile(file_path):
+                raise FileNotFoundError("file `%s` does not exist." % file_path )
+            
             if file_ext != ".tiff":
                 raise Exception("%s is not a valid tiff file" % file_path)
             
@@ -30,8 +33,8 @@ class ImageService:
                 raise Exception("skipping %s, jpg file already exists." % file_path)
             
             try:
-                im = Image.open(file_name)
-                print ("Generating jpeg for %s" % file_name)
+                im = Image.open(file_path)
+                print ("Generating jpeg for %s" % file_path)
                 im.thumbnail(im.size)
                 im.save(jpeg_file_path, "JPEG", quality=100)
                 
@@ -54,7 +57,7 @@ class ImageService:
             dir_path (str, optional): Directort path to be converted. Defaults to directory run from
         """
         
-        for root, files in os.walk(dir_path, topdown=False):
+        for root, dir, files in os.walk(dir_path, topdown=False):
             for name in files:
                 file_path = os.path.join(root, name)
                 ImageService.convert_tiff_to_jpeg(file_path)
