@@ -7,30 +7,56 @@ class ImageService:
     """Image Service
     """
     @staticmethod
-    def convert_tiff_to_jpeg(src_path: str = os.getcwd()):
-        """Convert TIFF Images in path to JPEG
+    def convert_tiff_to_jpeg(file_path: str) -> bool:
+        """Convert Image File from TIFF to JPEG
 
         Args:
-            src_path (str, optional): Path to convert images in. Defaults to os.getcwd().
+            file_path (str): JPEG file to be converted
+
+        Returns:
+            bool: conversion process completed for file
         """
-        for root, dirs, files in os.walk(src_path, topdown=False):
+        file_parts = os.path.splitext(file_path)
+        file_name = file_parts[0]
+        file_ext = file_parts[1].lower()
+        
+        completed:bool = False
+        try:
+            if file_ext != ".tiff":
+                raise Exception("%s is not a valid tiff file" % file_path)
+            
+            jpeg_file_path = file_name + ".jpg"
+            if os.path.isfile(jpeg_file_path):
+                raise Exception("skipping %s, jpg file already exists." % file_path)
+            
+            try:
+                im = Image.open(file_name)
+                print ("Generating jpeg for %s" % file_name)
+                im.thumbnail(im.size)
+                im.save(jpeg_file_path, "JPEG", quality=100)
+                
+            except Exception as e:
+                raise Exception("there was an issue converting the file, %s" % e)
+            
+            print ("%s converted from Tiff to JPEG." % file_path)
+            completed = True
+        except Exception as e:
+            print ("failed to convert file, %s" % e)
+        
+        return completed
+                        
+    
+    @staticmethod
+    def convert_directory_tiff_to_jpeg(dir_path: str = os.getcwd()):
+        """Convert TIFF files in Directory to JPEG
+
+        Args:
+            dir_path (str, optional): Directort path to be converted. Defaults to directory run from
+        """
+        
+        for root, files in os.walk(dir_path, topdown=False):
             for name in files:
-                print(os.path.join(root, name))
-                if os.path.splitext(os.path.join(root, name))[1].lower() == ".tiff":
-                    if os.path.isfile(os.path.splitext(os.path.join(root, name))[0] + ".jpg"):
-                        print("A jpeg file already exists for %s" % name)
-                    
-                    # If a jpeg is *NOT* present, create one from the tiff.
-                    else:
-                        outfile = os.path.splitext(os.path.join(root, name))[0] + ".jpg"
-                        try:
-                            im = Image.open(os.path.join(root, name))
+                file_path = os.path.join(root, name)
+                ImageService.convert_tiff_to_jpeg(file_path)
                             
-                            print ("Generating jpeg for %s" % name)
-                            
-                            
-                            im.thumbnail(im.size)
-                            im.save(outfile, "JPEG", quality=100)
-                        except Exception as e:
-                            print ("there was an issue converting the file, %s" % e)
                             
