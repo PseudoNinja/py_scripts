@@ -3,7 +3,7 @@ import pytest
 
 """py_scirpts Image Module Test File"""
 
-from py_scripts.ImageService import ImageService
+from py_scripts.image import ImageService
 
 test_dir:str = "src/py_scripts/tests/assets"
 test_tiff_image_file_path:str = test_dir+"/test_file.tiff"
